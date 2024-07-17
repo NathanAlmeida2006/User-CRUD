@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.user.controller.user_dto.UptadeUserFormDTO;
+import com.example.user.controller.user_dto.UpdateUserFormDTO;
 import com.example.user.controller.user_dto.UserDTO;
 import com.example.user.controller.user_dto.UserFormDTO;
 import com.example.user.entity.User;
@@ -57,12 +57,12 @@ public class ControllerUser {
      */
     @Transactional // Indica que o método deve ser executado dentro de uma transação.
     @PutMapping("/{id}") // Mapeia requisições PUT para este método. O ID do usuário é passado como parâmetro na URL.
-    public UptadeUserFormDTO toUpdate(@PathVariable Long id) {
+    public UpdateUserFormDTO toUpdate(@PathVariable Long id) {
         final Optional<User> optUser = userRepository.findById(id);
         if (optUser.isPresent()) {
             User user = optUser.get();
             userRepository.save(user); // Atualiza o usuário no banco de dados.
-            return new UptadeUserFormDTO(user); // Retorna os dados atualizados do usuário como resposta.
+            return new UpdateUserFormDTO(user); // Retorna os dados atualizados do usuário como resposta.
         }
 
         System.out.println("User not found!"); // Se o usuário não for encontrado, imprime uma mensagem de erro.
